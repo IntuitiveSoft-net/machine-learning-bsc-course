@@ -14,3 +14,18 @@
   max-height: 60vh !important;
   overflow-y: auto !important;
 }
+
+.slidev-code {
+  font-size: 0.7em !important;
+  line-height: 1.3em !important;
+}
+
+.slidev-layout table td,
+.slidev-layout table th {
+  padding: 0.4em 0.4em;
+}
+
+/* Add breathing room before h3 that follows other content */
+.slidev-layout .space-y-1 > h3 ~ h3 {
+  margin-top: 1.75rem !important;
+}

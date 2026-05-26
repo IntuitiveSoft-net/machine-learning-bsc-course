@@ -1,6 +1,6 @@
 ---
 theme: default
-title: Machine Learning Foundations — BSc Course
+title: Machine Learning Foundations
 info: |
   ## Machine Learning Foundations
   A first-year bachelor introduction to machine learning concepts, algorithms, and hands-on practice with Python.
@@ -15,11 +15,11 @@ mdc: true
 # Machine Learning Foundations
 
 <div class="pt-8">
-  <span class="text-orange-400 font-bold text-xl">BSc Course — First Year</span>
+  <span class="text-orange-400 font-bold text-xl">AI Fundamentals - Module 2</span>
 </div>
 
 <div class="pt-6 text-left inline-block">
-  <p class="text-sm text-gray-300">From data to models — a practical introduction</p>
+  <p class="text-sm text-gray-300">Guillaume Ladhuie, Patrice Nivaggioli</p>
 </div>
 
 <div class="abs-br m-6 text-sm text-gray-400">
@@ -473,7 +473,7 @@ layout: section
 
 # Linear Regression
 
-<div class="grid grid-cols-2 gap-4 mt-2 text-sm leading-tight">
+<div class="grid grid-cols-2 gap-20 mt-2 text-sm leading-tight">
 
 <div class="space-y-1">
 
@@ -481,7 +481,7 @@ layout: section
 
 Predict a continuous number: $\hat{y} = w \cdot x + b$
 
-```mermaid {scale: 0.4}
+```mermaid {scale: 0.6}
 graph LR
     X["Input x"] --> W["× w (slope)"]
     W --> ADD["+ b (intercept)"]
@@ -498,8 +498,9 @@ graph LR
 | $b$ | Bias (intercept) |
 | $\hat{y}$ | Predicted value |
 
-**Example:** $w=3000, b=50000$
-80 m² house → $3000 \times 80 + 50000 = 290{,}000$ €
+**Example:** 
+- $w=3000, b=50000$
+- 80 m² house → $3000 \times 80 + 50000 = 290{,}000$ €
 
 </div>
 
@@ -531,7 +532,7 @@ Each weight = impact of that feature on the prediction.
 
 # Logistic Regression & Classification
 
-<div class="grid grid-cols-2 gap-4 mt-2 text-sm leading-tight">
+<div class="grid grid-cols-2 gap-20 mt-2 text-sm leading-tight">
 
 <div class="space-y-1">
 
@@ -539,7 +540,9 @@ Each weight = impact of that feature on the prediction.
 
 Linear regression outputs −∞ to +∞. We need [0, 1].
 
-**Sigmoid function:** $\sigma(z) = \frac{1}{1 + e^{-z}}$
+**Sigmoid function:** 
+
+$$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
 ```mermaid {scale: 0.40}
 graph LR
@@ -581,8 +584,7 @@ Penalises confident wrong predictions heavily.
 
 ### When to use
 
-- **Binary** classification baseline
-- Need **probability** outputs
+- **Binary** classification baseline, need **probability** outputs
 - Features are roughly **linearly separable**
 - Need **interpretable** coefficients
 
@@ -656,9 +658,11 @@ Unpruned trees memorise training data. Solutions:
 
 # Ensemble Methods
 
-<div class="mt-1">
+<div class="grid grid-cols-2 gap-4 mt-2 text-xs leading-tight">
 
-```mermaid {scale: 0.75}
+<div class="space-y-1">
+
+```mermaid {scale: 0.55}
 graph LR
     X["Input"] --> T1["Tree 1"]
     X --> T2["Tree 2"]
@@ -678,12 +682,6 @@ graph LR
     style P fill:#16a34a,color:#fff
 ```
 
-</div>
-
-<div class="grid grid-cols-2 gap-4 mt-2 text-xs leading-tight">
-
-<div class="space-y-1">
-
 ### Random Forest (Bagging)
 
 1. Create **bootstrap samples** (random subsets with replacement)
@@ -696,6 +694,7 @@ graph LR
 </div>
 
 <div class="space-y-1">
+
 
 ### Gradient Boosting
 
@@ -857,7 +856,7 @@ Start with 1–2 hidden layers for tabular data.
 
 Imagine standing on a hill in fog — step downhill until you reach the bottom.
 
-```mermaid {scale: 0.65}
+```mermaid {scale: 0.4}
 graph TD
     A["Init weights<br/>randomly"] --> B["Forward pass:<br/>compute predictions"]
     B --> C["Compute loss"]
@@ -926,8 +925,8 @@ Customer segmentation · Image compression · Document organisation · Anomaly d
 
 ### k-Means algorithm
 
-```mermaid {scale: 0.65}
-graph TD
+```mermaid {scale: 0.40}
+graph LR
     S["1. Choose k<br/>random centroids"] --> A["2. Assign each point<br/>to nearest centroid"]
     A --> U["3. Recompute<br/>centroids (mean)"]
     U --> Q{"4. Changed?"}
@@ -953,23 +952,6 @@ graph TD
 | Sensitive to init | Yes (use `n_init=10`) |
 | Sensitive to outliers | Yes |
 | Scales well | Very well |
-
-### Code
-
-<div class="text-xs leading-tight">
-
-```python
-from sklearn.cluster import KMeans
-
-kmeans = KMeans(n_clusters=3,
-                random_state=42, n_init=10)
-kmeans.fit(X)
-
-labels = kmeans.labels_
-centroids = kmeans.cluster_centers_
-```
-
-</div>
 
 </div>
 
@@ -1041,7 +1023,7 @@ Finds **arbitrary-shaped** clusters by looking for dense regions.
 
 Too many features → slow training, overfitting, can't visualise.
 
-```mermaid {scale: 0.7}
+```mermaid {scale: 0.45}
 graph LR
     H["100 features"] --> DR["Dimensionality<br/>Reduction"]
     DR --> L["2–10 features"]
@@ -1078,22 +1060,7 @@ Plot **cumulative explained variance** vs # components. Common rule: keep 95%.
 | **Ordered** | PC1 captures most variance |
 | **Orthogonal** | Each PC ⊥ to all others |
 
-### PCA for preprocessing
 
-<div class="text-xs leading-tight">
-
-```python
-from sklearn.decomposition import PCA
-from sklearn.pipeline import Pipeline
-
-pipe = Pipeline([
-    ("scaler", StandardScaler()),
-    ("pca", PCA(n_components=0.95)),
-    ("clf", RandomForestClassifier()),
-])
-```
-
-</div>
 
 </div>
 
@@ -1136,25 +1103,7 @@ pipe = Pipeline([
 | **30** (default) | **Balanced** |
 | High (50–100) | Broader, clusters may merge |
 
-### Code
 
-<div class="text-xs leading-tight">
-
-```python
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
-
-tsne = TSNE(n_components=2,
-            random_state=42, perplexity=30)
-X_tsne = tsne.fit_transform(X_scaled)
-
-plt.scatter(X_tsne[:, 0], X_tsne[:, 1],
-            c=y, cmap="viridis", alpha=0.6)
-plt.title("t-SNE Visualisation")
-plt.show()
-```
-
-</div>
 
 ⚠️ t-SNE is for **visualisation only** — don't use as preprocessing for classifiers. Use PCA instead.
 
@@ -1175,7 +1124,7 @@ layout: section
 
 <div class="mt-1">
 
-```mermaid {scale: 0.8}
+```mermaid {scale: 0.7}
 graph LR
     P["1. Define<br/>Problem"] --> D["2. Explore<br/>Data"]
     D --> F["3. Prepare<br/>Features"]
@@ -1218,22 +1167,6 @@ Impute missing · Encode categories · Scale numericals · Create domain feature
 
 Try several models with **cross-validation**:
 
-<div class="text-xs leading-tight">
-
-```python
-models = {
-    "LogReg": LogisticRegression(),
-    "RF": RandomForestClassifier(),
-    "GBM": GradientBoostingClassifier(),
-    "k-NN": KNeighborsClassifier(),
-}
-for name, m in models.items():
-    scores = cross_val_score(
-        m, X_train, y_train, cv=5)
-    print(f"{name}: {scores.mean():.3f}")
-```
-
-</div>
 
 ### Steps 5–7
 
@@ -1243,265 +1176,7 @@ Evaluate with proper metrics → Tune with `GridSearchCV` → Final test set eva
 
 </div>
 
----
 
-# Scikit-Learn Pipelines & Data Leakage
-
-<div class="grid grid-cols-2 gap-4 mt-2 text-sm leading-tight">
-
-<div class="space-y-1">
-
-### Data leakage: the #1 beginner mistake
-
-```mermaid {scale: 0.65}
-graph LR
-    subgraph WRONG["❌ WRONG"]
-        W1["Scale ALL data"] --> W2["Then split"]
-    end
-    subgraph RIGHT["✅ RIGHT"]
-        R1["Split first"] --> R2["Fit scaler<br/>on train only"] --> R3["Transform both"]
-    end
-    style W1 fill:#ea580c,color:#fff
-    style W2 fill:#ea580c,color:#fff
-    style R1 fill:#16a34a,color:#fff
-    style R2 fill:#16a34a,color:#fff
-    style R3 fill:#16a34a,color:#fff
-```
-
-**Pipelines prevent leakage** by chaining preprocessing + model into one object.
-
-</div>
-
-<div class="space-y-1">
-
-### Pipeline with mixed features
-
-<div class="text-xs leading-tight">
-
-```python
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import (
-    StandardScaler, OneHotEncoder)
-from sklearn.impute import SimpleImputer
-
-num_pipe = Pipeline([
-    ("imputer", SimpleImputer(strategy="median")),
-    ("scaler", StandardScaler()),
-])
-cat_pipe = Pipeline([
-    ("imputer", SimpleImputer(
-        strategy="most_frequent")),
-    ("encoder", OneHotEncoder(
-        handle_unknown="ignore")),
-])
-preprocessor = ColumnTransformer([
-    ("num", num_pipe, num_features),
-    ("cat", cat_pipe, cat_features),
-])
-full_pipe = Pipeline([
-    ("preprocess", preprocessor),
-    ("model", GradientBoostingClassifier()),
-])
-full_pipe.fit(X_train, y_train)
-```
-
-</div>
-
-</div>
-
-</div>
-
----
-
-# Hyperparameter Tuning
-
-<div class="grid grid-cols-2 gap-4 mt-2 text-sm leading-tight">
-
-<div class="space-y-1">
-
-### Grid Search vs Random Search
-
-| Method | How | Pros | Cons |
-|:-------|:----|:-----|:-----|
-| **Grid** | All combos | Thorough | Slow |
-| **Random** | Sample random | Faster | May miss best |
-
-### Grid Search example
-
-<div class="text-xs leading-tight">
-
-```python
-from sklearn.model_selection import GridSearchCV
-
-param_grid = {
-    "model__n_estimators": [100, 200, 300],
-    "model__max_depth": [3, 5, 10, None],
-    "model__learning_rate": [0.05, 0.1, 0.2],
-}
-grid = GridSearchCV(
-    full_pipe, param_grid,
-    cv=5, scoring="f1", n_jobs=-1
-)
-grid.fit(X_train, y_train)
-
-print(f"Best: {grid.best_params_}")
-print(f"CV F1: {grid.best_score_:.3f}")
-```
-
-</div>
-
-`model__` prefix targets the pipeline step named `"model"`.
-
-</div>
-
-<div class="space-y-1">
-
-### Final evaluation
-
-<div class="text-xs leading-tight">
-
-```python
-from sklearn.metrics import (
-    classification_report, confusion_matrix)
-
-best = grid.best_estimator_
-y_pred = best.predict(X_test)
-
-print(classification_report(y_test, y_pred))
-
-cm = confusion_matrix(y_test, y_pred)
-sns.heatmap(cm, annot=True, fmt="d",
-            cmap="Blues")
-plt.title("Test Confusion Matrix")
-plt.show()
-```
-
-</div>
-
-### Golden rules
-
-- ⚠️ **Never tune on the test set**
-- ⚠️ **Test set used exactly once** — at the very end
-- ⚠️ **Always cross-validate** during development
-- ⚠️ **Pipeline wraps everything** — prevents leakage
-
-</div>
-
-</div>
-
----
-
-# Ethics & Limitations of ML
-
-<div class="grid grid-cols-2 gap-4 mt-2 text-sm leading-tight">
-
-<div class="space-y-1">
-
-### How bias enters models
-
-```mermaid {scale: 0.65}
-graph LR
-    B["Historical<br/>bias in data"] --> M["Model learns<br/>biased patterns"]
-    M --> D["Biased<br/>decisions"]
-    D --> F["Feedback loop"]
-    F --> B
-    style B fill:#ea580c,color:#fff
-    style M fill:#7c3aed,color:#fff
-    style D fill:#ea580c,color:#fff
-    style F fill:#2563eb,color:#fff
-```
-
-Data collection · Labelling · Feature choice · Training · Evaluation · Deployment — bias can enter at **every stage**.
-
-### Types of fairness
-
-| Criterion | Definition |
-|:----------|:----------|
-| **Demographic parity** | Equal acceptance rate across groups |
-| **Equal opportunity** | Equal TPR across groups |
-| **Individual fairness** | Similar people → similar predictions |
-
-</div>
-
-<div class="space-y-1">
-
-### Interpretability spectrum
-
-| Model | Interpretability |
-|:------|:----------------|
-| Linear / Logistic Reg | **High** |
-| Decision Tree | **High** |
-| Random Forest | **Medium** |
-| Neural Network | **Low** |
-
-### What ML cannot do
-
-- Can't reason **causally** (correlation ≠ causation)
-- Can't **generalise** beyond training data
-- Can't handle **rare events** well
-- Can't replace **domain expertise**
-- Can't guarantee **fairness** automatically
-
-### Privacy basics
-
-Minimise data · Anonymise · Aggregate · Access control · Know **GDPR** / **AI Act**
-
-</div>
-
-</div>
-
----
-
-# Responsible ML Checklist
-
-<div class="grid grid-cols-2 gap-4 mt-2 text-sm leading-tight">
-
-<div class="space-y-1">
-
-### 8 questions for every project
-
-<div class="border border-purple-400 rounded-lg p-3 space-y-1">
-
-1. Is ML the **right tool** for this problem?
-2. Is the data **representative** and fair?
-3. Are **protected attributes** handled properly?
-4. Performance checked **across groups**?
-5. Can you **explain** the model's decisions?
-6. Is personal data **protected**?
-7. What's the **worst that could happen**?
-8. Is there **human oversight**?
-
-</div>
-
-</div>
-
-<div class="space-y-1">
-
-### Practical guidance
-
-| # | Action |
-|:--|:-------|
-| 1 | Consider if simple rules would work |
-| 2 | Check class balance & demographic coverage |
-| 3 | Watch for proxy features (postcode → ethnicity) |
-| 4 | Report metrics **per subgroup** |
-| 5 | Use interpretable models for high-stakes |
-| 6 | Follow data minimisation; comply with regs |
-| 7 | Think about failure modes & impact |
-| 8 | Keep humans in the loop for critical decisions |
-
-### Key regulations
-
-**GDPR** (EU) — Right to explanation, right to be forgotten
-
-**AI Act** (EU) — Risk-based classification of AI systems
-
-**CCPA** (California) — Right to know, right to delete
-
-</div>
-
-</div>
 
 ---
 layout: section
@@ -1546,8 +1221,6 @@ layout: section
 
 **PCA** — reduce dimensions, max variance
 
-**t-SNE** — non-linear visualisation
-
 </div>
 
 </div>
@@ -1568,119 +1241,8 @@ layout: section
 
 </div>
 
-### Ethics & Best Practices
-
-<div class="border border-green-400 rounded-lg p-3 space-y-1">
-
-- Bias enters at every stage — **check for it**
-- Use **interpretable** models when stakes are high
-- **Pipelines** prevent data leakage
-- **Never** tune on the test set
-- ML ≠ magic — it amplifies what's in the data
-
 </div>
 
 </div>
 
-</div>
 
----
-
-# Model Selection Guide
-
-<div class="mt-2">
-
-```mermaid {scale: 0.85}
-graph TD
-    Q{"Dataset size?"}
-    Q -->|"< 1k rows"| S["Linear / Logistic Reg<br/>Decision Tree"]
-    Q -->|"1k – 100k"| M["Random Forest<br/>Gradient Boosting"]
-    Q -->|"> 100k"| L["XGBoost<br/>Neural Networks"]
-    S --> CV["Compare with<br/>cross-validation"]
-    M --> CV
-    L --> CV
-    CV --> TUNE["Tune best model<br/>with GridSearchCV"]
-    TUNE --> EVAL["Final test set<br/>evaluation"]
-    style Q fill:#ea580c,color:#fff
-    style S fill:#2563eb,color:#fff
-    style M fill:#16a34a,color:#fff
-    style L fill:#7c3aed,color:#fff
-    style CV fill:#ea580c,color:#fff
-    style TUNE fill:#ea580c,color:#fff
-    style EVAL fill:#16a34a,color:#fff
-```
-
-</div>
-
-<div class="grid grid-cols-3 gap-4 mt-2 text-sm">
-
-<div class="bg-purple-50 dark:bg-purple-900 rounded-lg p-3">
-
-**Tabular data?**
-Tree-based models first (RF, GBM). NNs rarely help.
-
-</div>
-
-<div class="bg-orange-50 dark:bg-orange-900 rounded-lg p-3">
-
-**Images / Text / Audio?**
-Neural networks (CNNs, Transformers) are the way to go.
-
-</div>
-
-<div class="bg-blue-50 dark:bg-blue-900 rounded-lg p-3">
-
-**Need explainability?**
-Linear models or decision trees. Avoid deep learning.
-
-</div>
-
-</div>
-
----
-layout: center
-class: text-center
----
-
-# What to Learn Next
-
-<div class="grid grid-cols-3 gap-4 mt-4 text-left text-sm">
-
-<div class="border border-purple-400 rounded-lg p-3">
-
-### Immediate
-- Regularisation (Ridge, Lasso)
-- XGBoost / LightGBM
-- Feature selection
-- Imbalanced data handling
-
-</div>
-
-<div class="border border-orange-400 rounded-lg p-3">
-
-### Deep Learning
-- PyTorch / TensorFlow
-- CNNs (images)
-- Transformers (text)
-- Generative AI (LLMs)
-
-</div>
-
-<div class="border border-blue-400 rounded-lg p-3">
-
-### Resources
-- *Hands-On ML* (Géron)
-- *Intro to Stat. Learning*
-- Fast.ai courses
-- Kaggle competitions
-- MSc Study Guide →
-
-</div>
-
-</div>
-
-<div class="mt-6 text-sm text-gray-400">
-
-The best way to learn ML is to **practise with real data**. Pick a dataset, define a question, build a model end to end.
-
-</div>

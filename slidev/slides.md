@@ -50,10 +50,9 @@ mdc: true
 
 ### Part IV — Putting It All Together
 12. **The Complete ML Pipeline**
-13. **Ethics & Limitations**
 
-### Appendices
-A. Python & NumPy Crash Course · B. Math You Need · C. Notation · D. Glossary · E. What to Learn Next
+### Summary
+13. Course Recap
 
 </div>
 
@@ -407,11 +406,13 @@ Split data into k folds → train on k−1, validate on 1 → repeat k times →
 
 | Metric | Formula |
 |:-------|:--------|
-| **MAE** | $\frac{1}{n}\sum\|y_i - \hat{y}_i\|$ |
-| **MSE** | $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$ |
-| **RMSE** | $\sqrt{MSE}$ |
-| **R²** | 1 − SS_res / SS_tot |
+| **MAE** — Mean Absolute Error | $\frac{1}{n}\sum\|y_i - \hat{y}_i\|$ |
+| **MSE** — Mean Squared Error | $\frac{1}{n}\sum(y_i - \hat{y}_i)^2$ |
+| **RMSE** — Root Mean Squared Error | $\sqrt{MSE}$ |
+| **R²** — R-squared | 1 − SS_res / SS_tot |
 
+SS_tot= total sum of squares.  
+SS_res= residual sum of squares.  
 </div>
 
 </div>
@@ -531,9 +532,11 @@ Each weight = impact of that feature on the prediction.
 
 ### From numbers to probabilities
 
-Linear regression outputs −∞ to +∞. We need [0, 1].
+Both Linear & Logistic Regression use the **same linear function:** $z = w \cdot x + b$
 
-**Sigmoid function:** 
+**"Regression"** refers to predicting continuous values, not the formula shape.
+
+Logistic wraps it with **sigmoid** to convert [−∞, +∞] → [0, 1]:
 
 $$\sigma(z) = \frac{1}{1 + e^{-z}}$$
 
@@ -788,9 +791,9 @@ where $f$ is an **activation function**.
 
 | Function | Range | Used for |
 |:---------|:------|:---------|
-| **ReLU** $\max(0,z)$ | [0, ∞) | Hidden layers |
-| **Sigmoid** | (0, 1) | Binary output |
-| **Softmax** | (0,1) sums to 1 | Multi-class output |
+| **ReLU** $\max(0,z)$ | \[0, +∞\[ | Hidden layers |
+| **Sigmoid** | \]0, 1\[ | Binary output |
+| **Softmax** | \]0, 1\[ sums to 1 | Multi-class output |
 
 **ReLU** in hidden layers by default. Sigmoid/Softmax only at the output.
 
@@ -1237,5 +1240,3 @@ layout: section
 </div>
 
 </div>
-
-
